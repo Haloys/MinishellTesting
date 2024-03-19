@@ -70,7 +70,7 @@ Basically, it will execute this command after the pipe but before the terminal c
 `Command | Subcommand Terminal`
 
 To add them in your test, you can use the $ sign followed by a space like this in your **commands.txt**'s file.
-```
+
 > Test
 $ Subcommand
 Command
@@ -84,4 +84,3 @@ If the `.github/workflows` directory does not exist in your project, you'll need
 (feel free to customize the `EXECUTABLE` and workflow `name` as needed):
 
 Replace https://github.com/Haloys/MinishellTesting.git with your own fork URL if you've made further customizations.
-```
