@@ -1,15 +1,22 @@
-# MinishellTesting
+# MinishellTesting - Updated Version
+
+This repository contains an updated version of the MinishellTesting framework originally created by [paulogarithm](https://github.com/paulogarithm). Special thanks to the original author for providing a solid foundation for these tests.
+
+## Updates in This Version
+
+- Additional tests covering new cases.
+- Integration with GitHub Actions for automated testing.
 
 ## How to get it ?
 Clone this repo in your minishell folder by using this command :<br/>
-`git clone git@github.com:paulogarithm/MinishellTesting.git`
+`git clone git@github.com:Haloys/MinishellTesting.git`
 
 You should now have something like this
 ```
 [minishell] $ ls
 lib  Makefile  src
 
-[minishell] $ git clone git@github.com:paulogarithm/MinishellTesting.git
+[minishell] $ git clone git@github.com:Haloys/MinishellTesting.git
 ...
 
 [minishell] $ ls
@@ -67,4 +74,14 @@ To add them in your test, you can use the $ sign followed by a space like this i
 > Test
 $ Subcommand
 Command
+
+## Updates in This Version
+
+To automate testing with GitHub Actions, you simply need to copy the `minishell_test.yml` file provided at the root of this repository into the `.github/workflows` directory of your own Minishell project. This allows for automatic testing to be set up with minimal effort.
+
+If the `.github/workflows` directory does not exist in your project, you'll need to create it.
+
+(feel free to customize the `EXECUTABLE` and workflow `name` as needed):
+
+Replace https://github.com/Haloys/MinishellTesting.git with your own fork URL if you've made further customizations.
 ```
