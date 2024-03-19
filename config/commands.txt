@@ -2,18 +2,18 @@
 
 >>> Required
 
-> Functionnal pwd
-echo -ne "pwd"
+> Functionnal ls
+echo -ne "ls"
 
 > Multiple commands
-echo -ne "pwd\npwd"
+echo -ne "ls\nls"
 
 >>> End
 
 >>> Basics tests
 
-> Bad pwd
-echo -ne "pwd nofile"
+> Bad ls
+echo -ne "ls nofile"
 
 > Empty string
 echo -ne ""
@@ -22,11 +22,27 @@ echo -ne ""
 echo -ne "exit"
 
 > Exit
-echo -ne "exit\npwd"
+echo -ne "exit\nls"
 
 > Empty Env
 $ env -i
-echo -ne "pwd"
+echo -ne "ls"
+
+>>> End
+
+>>> Line formatting (space and tabs)
+
+> Only spaces
+echo -ne "       "
+
+> Only spaces 2
+echo -ne "      ls         -l     -all    "
+
+> Only tabs
+echo -ne "\tls\t-l\t-all\t"
+
+> Tabs and spaces
+echo -ne "\tls      \t   -l  \t-all      \t   "
 
 >>> End
 
@@ -45,7 +61,7 @@ echo -ne "unsetenv foo"
 echo -ne "unsetenv foo bar"
 
 > Unset Path
-echo -ne "pwd\nunsetenv PATH\npwd"
+echo -ne "ls\nunsetenv PATH\nls"
 
 >>> End
 
@@ -61,22 +77,118 @@ echo -ne "cd /"
 echo -ne "cd .."
 
 > Empty cd
-echo -ne "pwd\ncd\npwd"
+echo -ne "ls\ncd\nls"
 
 > Normal cd
-echo -ne "pwd\ncd lib\npwd"
+echo -ne "ls\ncd lib\nls"
 
 > Root cd
-echo -ne "pwd\ncd /\npwd"
+echo -ne "ls\ncd /\nls"
 
 > Back cd
-echo -ne "pwd\ncd ..\npwd"
+echo -ne "ls\ncd ..\nls"
 
 > Vague cd
-echo -ne "pwd\ncd ~\npwd"
+echo -ne "ls\ncd ~\nls"
 
-> Minus cd
-echo -ne "cd /\npwd\ncd -\npwd"
+>>> End
+
+>>> Pipe tests
+
+> ls + wc
+echo -ne "ls / | wc -l"
+
+> ls + wc + cat
+echo -ne "ls / | wc -l | cat -e"
+
+> ls and cat x4
+echo -ne "ls / | cat -e | cat -e | cat -e | cat -e"
+
+> ls no space between pipe
+echo -ne "ls /|cat -e|cat -e"
+
+> pipe error
+echo -ne "|"
+
+> pipe with grep
+echo -ne "ls -l | grep lib | cat -e"
+
+> pipe before args
+echo -ne "| ls | cat -e"
+
+> double pipe
+echo -ne "ls | | cat -e"
+
+> setenv pipe
+echo -ne "setenv | grep PWD | cat -e"
+
+> cd pipe
+echo -ne "cd /var/log | ls -la"
+
+> env pipe
+echo -ne "env | grep TERM"
+
+> unsetenv pipe
+echo -ne "unsetenv LANG | echo "Hello, world!""
+
+> ls big input i guess lol
+echo -ne "ls | ls | wc -l | ls ; ls ; ls -la | ls | ls | ls | ls | ls | cat -e | ls | wc -l | ls | ls | ls | ls | wc -l | ls | ls | ls | ls ; ll | ls | ls | wc -l | ll | wc -l | ls | ls ; ls | ls | ls ; env | ls | ls | ll | ls | wc -l | ls | ls | ls | ls ; ls ; ls ; ls ; ls ; ls ; ls ; ls | wc -l ; ls -l ; ls -l ; ls | wc -l"
+
+>>> End
+
+>>> Redirection tests
+
+> subject tests
+echo -ne "mkdir subject ; cd subject ; ls -a ; ls | cat | wc -c > tutu ; cat tutu"
+
+> Simple redirection
+echo -ne "echo "Hello World" > hello.txt; cat hello.txt"
+
+> Simple redirection 2
+echo -ne "ls > list.txt; cat list.txt"
+
+> Redirection + pipe
+echo -ne "ls | wc -l > count.txt; cat count.txt"
+
+> Redirection + pipe 2
+echo -ne "touch testfile; ls | wc -l > testfile; cat testfile"
+
+> Simple double redirection
+echo -ne "echo "Hello, World!" > hello.txt ; cat < hello.txt > output.txt ; cat output.txt"
+
+> Word count to file
+echo -ne "echo "This is a test file." > testfile.txt; wc -w < testfile.txt > count.txt; cat count.txt"
+
+> Pipe to character count
+echo -ne "echo "Another test" > start.txt; cat start.txt | wc -c > chars.txt; cat chars.txt"
+
+> Sort and output redirection
+echo -ne "printf "banana\napple\norange" > fruits.txt; sort < fruits.txt > sorted_fruits.txt; cat sorted_fruits.txt"
+
+> Sorted lines to file
+echo -ne "echo "Line 1" > lines.txt; echo "Line 2" >> lines.txt; sort < lines.txt > sorted_lines.txt; cat sorted_lines.txt"
+
+> clear file
+echo -ne "rm *.txt ; rm testfile ; rm -rf subject"
+
+>>> End
+
+>>> Semicolon tests
+
+> default ls
+echo -ne "ls ; ls ; ls ; ls ; ls ; ls ; ls ; ls"
+
+> ls no space between colon
+echo -ne "ls;ls;ls;ls;ls;ls;ls;ls"
+
+> ls + exit
+echo -ne "ls ; exit ; ls"
+
+> semicolon error
+echo -ne ";"
+
+> ls ; aa ; ls
+echo -ne "ls ; aa ; ls"
 
 >>> End
 
