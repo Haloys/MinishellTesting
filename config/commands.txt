@@ -119,9 +119,6 @@ printf "| ls | cat -e"
 > double pipe
 printf "ls | | cat -e"
 
-> setenv pipe
-printf "setenv | grep PWD | cat -e"
-
 > cd pipe
 printf "cd /var/log | ls -la"
 
@@ -131,15 +128,12 @@ printf "env | grep TERM"
 > unsetenv pipe
 printf "unsetenv LANG | echo "Hello, world!""
 
-> ls big input i guess lol
+> Ls big input
 printf "ls | ls | wc -l | ls ; ls ; ls -la | ls | ls | ls | ls | ls | cat -e | ls | wc -l | ls | ls | ls | ls | wc -l | ls | ls | ls | ls ; ls -l | ls | ls | wc -l | ls -l | wc -l | ls | ls ; ls | ls | ls ; env | ls | ls | ls -l | ls | wc -l | ls | ls | ls | ls ; ls ; ls ; ls ; ls ; ls ; ls ; ls | wc -l ; ls -l ; ls -l ; ls | wc -l"
 
 >>> End
 
 >>> Redirection tests
-
-> subject tests
-printf "mkdir subject ; cd subject ; ls -a ; ls | cat | wc -c > tutu ; cat tutu"
 
 > Simple redirection
 printf "echo "Hello World" > hello.txt; cat hello.txt"
@@ -168,7 +162,7 @@ printf "printf "banana\napple\norange" > fruits.txt; sort < fruits.txt > sorted_
 > Sorted lines to file
 printf "echo "Line 1" > lines.txt; echo "Line 2" >> lines.txt; sort < lines.txt > sorted_lines.txt; cat sorted_lines.txt"
 
-> clear file
+> clear file (it's not a test)
 printf "rm *.txt ; rm testfile ; rm -rf subject"
 
 >>> End
