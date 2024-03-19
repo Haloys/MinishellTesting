@@ -1,0 +1,46 @@
+name: Minishell Test Workflow # Name of the workflow (can be anything)
+
+on: [push, pull_request]
+
+jobs:
+  clone_and_tests:
+    name: Clone and Run MinishellTests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main repository
+        uses: actions/checkout@v4
+
+      - name: Install tcsh
+        run: sudo apt-get update && sudo apt-get install -y tcsh
+
+      - name: Clone MinishellTesting repository using HTTPS
+        run: git clone https://github.com/Haloys/MinishellTesting.git
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+
+      - name: Build executable
+        run: make re
+
+      - name: Run MinishellTests
+        run: |
+          chmod +x MinishellTesting/run
+          MinishellTesting/run
+        env:
+          EXECUTABLE: ./mysh # Path to the executable (can be anything)
+
+      - name: Display test.log content
+        if: always()
+        run: |
+          if [[ -f MinishellTesting/config/test.log ]]; then
+              cat MinishellTesting/config/test.log
+          else
+              echo "Test log not found."
+          fi
