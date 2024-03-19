@@ -3,228 +3,228 @@
 >>> Required
 
 > Functionnal ls
-echo -ne "ls"
+printf "ls"
 
 > Multiple commands
-echo -ne "ls\nls"
+printf "ls\nls"
 
 >>> End
 
 >>> Basics tests
 
 > Bad ls
-echo -ne "ls nofile"
+printf "ls nofile"
 
 > Empty string
-echo -ne ""
+printf ""
 
 > (Run) Exit
-echo -ne "exit"
+printf "exit"
 
 > Exit
-echo -ne "exit\nls"
+printf "exit\nls"
 
 > Empty Env
 $ env -i
-echo -ne "ls"
+printf "ls"
 
 >>> End
 
 >>> Line formatting (space and tabs)
 
 > Only spaces
-echo -ne "       "
+printf "       "
 
 > Only spaces 2
-echo -ne "      ls         -l     -all    "
+printf "      ls         -l     -all    "
 
 > Only tabs
-echo -ne "\tls\t-l\t-all\t"
+printf "\tls\t-l\t-all\t"
 
 > Tabs and spaces
-echo -ne "\tls      \t   -l  \t-all      \t   "
+printf "\tls      \t   -l  \t-all      \t   "
 
 >>> End
 
 >>> Setenv Unsetenv tests
 
 > (Run) Setenv 1 value
-echo -ne "setenv foo"
+printf "setenv foo"
 
 > (Run) Setenv 2 values
-echo -ne "setenv foo bar"
+printf "setenv foo bar"
 
 > (Run) Unset 1 value
-echo -ne "unsetenv foo"
+printf "unsetenv foo"
 
 > (Run) Unset 2 values
-echo -ne "unsetenv foo bar"
+printf "unsetenv foo bar"
 
 > Unset Path
-echo -ne "ls\nunsetenv PATH\nls"
+printf "ls\nunsetenv PATH\nls"
 
 >>> End
 
 >>> Cd Tests
 
 > (Run) Empty cd
-echo -ne "cd"
+printf "cd"
 
 > (Run) Root cd
-echo -ne "cd /"
+printf "cd /"
 
 > (Run) Back cd
-echo -ne "cd .."
+printf "cd .."
 
 > Empty cd
-echo -ne "ls\ncd\nls"
+printf "ls\ncd\nls"
 
 > Normal cd
-echo -ne "ls\ncd lib\nls"
+printf "ls\ncd lib\nls"
 
 > Root cd
-echo -ne "ls\ncd /\nls"
+printf "ls\ncd /\nls"
 
 > Back cd
-echo -ne "ls\ncd ..\nls"
+printf "ls\ncd ..\nls"
 
 > Vague cd
-echo -ne "ls\ncd ~\nls"
+printf "ls\ncd ~\nls"
 
 >>> End
 
 >>> Pipe tests
 
 > ls + wc
-echo -ne "ls / | wc -l"
+printf "ls / | wc -l"
 
 > ls + wc + cat
-echo -ne "ls / | wc -l | cat -e"
+printf "ls / | wc -l | cat -e"
 
 > ls and cat x4
-echo -ne "ls / | cat -e | cat -e | cat -e | cat -e"
+printf "ls / | cat -e | cat -e | cat -e | cat -e"
 
 > ls no space between pipe
-echo -ne "ls /|cat -e|cat -e"
+printf "ls /|cat -e|cat -e"
 
 > pipe error
-echo -ne "|"
+printf "|"
 
 > pipe with grep
-echo -ne "ls -l | grep lib | cat -e"
+printf "ls -l | grep lib | cat -e"
 
 > pipe before args
-echo -ne "| ls | cat -e"
+printf "| ls | cat -e"
 
 > double pipe
-echo -ne "ls | | cat -e"
+printf "ls | | cat -e"
 
 > setenv pipe
-echo -ne "setenv | grep PWD | cat -e"
+printf "setenv | grep PWD | cat -e"
 
 > cd pipe
-echo -ne "cd /var/log | ls -la"
+printf "cd /var/log | ls -la"
 
 > env pipe
-echo -ne "env | grep TERM"
+printf "env | grep TERM"
 
 > unsetenv pipe
-echo -ne "unsetenv LANG | echo "Hello, world!""
+printf "unsetenv LANG | echo "Hello, world!""
 
 > ls big input i guess lol
-echo -ne "ls | ls | wc -l | ls ; ls ; ls -la | ls | ls | ls | ls | ls | cat -e | ls | wc -l | ls | ls | ls | ls | wc -l | ls | ls | ls | ls ; ll | ls | ls | wc -l | ll | wc -l | ls | ls ; ls | ls | ls ; env | ls | ls | ll | ls | wc -l | ls | ls | ls | ls ; ls ; ls ; ls ; ls ; ls ; ls ; ls | wc -l ; ls -l ; ls -l ; ls | wc -l"
+printf "ls | ls | wc -l | ls ; ls ; ls -la | ls | ls | ls | ls | ls | cat -e | ls | wc -l | ls | ls | ls | ls | wc -l | ls | ls | ls | ls ; ll | ls | ls | wc -l | ll | wc -l | ls | ls ; ls | ls | ls ; env | ls | ls | ll | ls | wc -l | ls | ls | ls | ls ; ls ; ls ; ls ; ls ; ls ; ls ; ls | wc -l ; ls -l ; ls -l ; ls | wc -l"
 
 >>> End
 
 >>> Redirection tests
 
 > subject tests
-echo -ne "mkdir subject ; cd subject ; ls -a ; ls | cat | wc -c > tutu ; cat tutu"
+printf "mkdir subject ; cd subject ; ls -a ; ls | cat | wc -c > tutu ; cat tutu"
 
 > Simple redirection
-echo -ne "echo "Hello World" > hello.txt; cat hello.txt"
+printf "echo "Hello World" > hello.txt; cat hello.txt"
 
 > Simple redirection 2
-echo -ne "ls > list.txt; cat list.txt"
+printf "ls > list.txt; cat list.txt"
 
 > Redirection + pipe
-echo -ne "ls | wc -l > count.txt; cat count.txt"
+printf "ls | wc -l > count.txt; cat count.txt"
 
 > Redirection + pipe 2
-echo -ne "touch testfile; ls | wc -l > testfile; cat testfile"
+printf "touch testfile; ls | wc -l > testfile; cat testfile"
 
 > Simple double redirection
-echo -ne "echo "Hello, World!" > hello.txt ; cat < hello.txt > output.txt ; cat output.txt"
+printf "echo "Hello, World!" > hello.txt ; cat < hello.txt > output.txt ; cat output.txt"
 
 > Word count to file
-echo -ne "echo "This is a test file." > testfile.txt; wc -w < testfile.txt > count.txt; cat count.txt"
+printf "echo "This is a test file." > testfile.txt; wc -w < testfile.txt > count.txt; cat count.txt"
 
 > Pipe to character count
-echo -ne "echo "Another test" > start.txt; cat start.txt | wc -c > chars.txt; cat chars.txt"
+printf "echo "Another test" > start.txt; cat start.txt | wc -c > chars.txt; cat chars.txt"
 
 > Sort and output redirection
-echo -ne "printf "banana\napple\norange" > fruits.txt; sort < fruits.txt > sorted_fruits.txt; cat sorted_fruits.txt"
+printf "printf "banana\napple\norange" > fruits.txt; sort < fruits.txt > sorted_fruits.txt; cat sorted_fruits.txt"
 
 > Sorted lines to file
-echo -ne "echo "Line 1" > lines.txt; echo "Line 2" >> lines.txt; sort < lines.txt > sorted_lines.txt; cat sorted_lines.txt"
+printf "echo "Line 1" > lines.txt; echo "Line 2" >> lines.txt; sort < lines.txt > sorted_lines.txt; cat sorted_lines.txt"
 
 > clear file
-echo -ne "rm *.txt ; rm testfile ; rm -rf subject"
+printf "rm *.txt ; rm testfile ; rm -rf subject"
 
 >>> End
 
 >>> Semicolon tests
 
 > default ls
-echo -ne "ls ; ls ; ls ; ls ; ls ; ls ; ls ; ls"
+printf "ls ; ls ; ls ; ls ; ls ; ls ; ls ; ls"
 
 > ls no space between colon
-echo -ne "ls;ls;ls;ls;ls;ls;ls;ls"
+printf "ls;ls;ls;ls;ls;ls;ls;ls"
 
 > ls + exit
-echo -ne "ls ; exit ; ls"
+printf "ls ; exit ; ls"
 
 > semicolon error
-echo -ne ";"
+printf ";"
 
 > ls ; aa ; ls
-echo -ne "ls ; aa ; ls"
+printf "ls ; aa ; ls"
 
 >>> End
 
 >>> Error Messages
 
 > Bad command
-echo -ne "notcommand"
+printf "notcommand"
 
 > Mispell exit
-echo -ne "exitt"
+printf "exitt"
 
 > Cd nofile
-echo -ne "cd nofile"
+printf "cd nofile"
 
 > Cd file
-echo -ne "cd ./mysh"
+printf "cd ./mysh"
 
 > Cd first minus
-echo -ne "cd -"
+printf "cd -"
 
 > Setenv too many args
-echo -ne "setenv a a a"
+printf "setenv a a a"
 
 > Setenv incorrect variable
-echo -ne "setenv -"
+printf "setenv -"
 
 > Unsetenv too few args
-echo -ne "unsetenv"
+printf "unsetenv"
 
 > Segfault
-echo -ne MinishellTesting/bin/segfault.out
+printf MinishellTesting/bin/segfault.out
 
 > Broken
-echo -ne MinishellTesting/bin/broken.out
+printf MinishellTesting/bin/broken.out
 
 > Floating
-echo -ne MinishellTesting/bin/floating.out
+printf MinishellTesting/bin/floating.out
 
 >>> End
