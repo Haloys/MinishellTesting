@@ -3,6 +3,7 @@
 import os
 import subprocess
 import math
+import time
 
 from my_color import *
 from my_box import *
@@ -32,7 +33,7 @@ def display(n: float, name: str):
 
 def my_tests() -> float:
     f = open(f_command, "r+")
-    array, name, i = [], "", 0
+    array, name, i, test_times = [], "", 0, {}
     testing_cathegory = ""
     beforecommand = ""
 
@@ -65,16 +66,21 @@ def my_tests() -> float:
             continue
 
         name = name[2:]
+        start_time = time.time()
         valid_output = subprocess.getoutput(f"{command} | {beforecommand} tcsh")
+        end_time = time.time()
+        execution_time = end_time - start_time
         your_output = subprocess.getoutput(f"{command} | {beforecommand} ./mysh")
         beforecommand = ""
 
         res = valid_output == your_output
         array.append(res)
+        test_times[name] = execution_time
 
         if not res:
             f = open(f"{d_config}/test.log", "a")
             f.write(name + ":\n")
+            f.write(f"Execution time: {execution_time:.4f} seconds\n")
 
             box1, size1 = box_that("Yours", your_output.split('\n'))
             box2, size2 = box_that("Correct", valid_output.split('\n'))
@@ -87,9 +93,10 @@ def my_tests() -> float:
             f.write(box2 + "\n\n")
             f.close()
 
+        execution_info = f" ({execution_time:.4f}s)"
         showing = f"{my_color.green}[S]{my_color.default}" if res else f"{my_color.red} [X]{my_color.default}"
         showing = showing.ljust(16).rjust(17)
-        print(f"{showing} {name}")
+        print(f"{showing} {name}{execution_info}")
     f.close()
 
 
