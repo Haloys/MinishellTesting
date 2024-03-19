@@ -71,9 +71,11 @@ Basically, it will execute this command after the pipe but before the terminal c
 
 To add them in your test, you can use the $ sign followed by a space like this in your **commands.txt**'s file.
 
+```
 > Test
 $ Subcommand
 Command
+```
 
 ## Updates in This Version
 
