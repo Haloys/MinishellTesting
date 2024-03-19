@@ -132,7 +132,7 @@ printf "env | grep TERM"
 printf "unsetenv LANG | echo "Hello, world!""
 
 > ls big input i guess lol
-printf "ls | ls | wc -l | ls ; ls ; ls -la | ls | ls | ls | ls | ls | cat -e | ls | wc -l | ls | ls | ls | ls | wc -l | ls | ls | ls | ls ; ll | ls | ls | wc -l | ll | wc -l | ls | ls ; ls | ls | ls ; env | ls | ls | ll | ls | wc -l | ls | ls | ls | ls ; ls ; ls ; ls ; ls ; ls ; ls ; ls | wc -l ; ls -l ; ls -l ; ls | wc -l"
+printf "ls | ls | wc -l | ls ; ls ; ls -la | ls | ls | ls | ls | ls | cat -e | ls | wc -l | ls | ls | ls | ls | wc -l | ls | ls | ls | ls ; ls -l | ls | ls | wc -l | ls -l | wc -l | ls | ls ; ls | ls | ls ; env | ls | ls | ls -l | ls | wc -l | ls | ls | ls | ls ; ls ; ls ; ls ; ls ; ls ; ls ; ls | wc -l ; ls -l ; ls -l ; ls | wc -l"
 
 >>> End
 
