@@ -70,7 +70,7 @@ def my_tests() -> float:
         valid_output = subprocess.getoutput(f"{command} | {beforecommand} tcsh")
         end_time = time.time()
         execution_time = end_time - start_time
-        your_output = subprocess.getoutput(f"{command} | {beforecommand} ./mysh")
+        your_output = subprocess.getoutput(f"{command} | {beforecommand} ./42sh")
         beforecommand = ""
 
         res = valid_output == your_output
