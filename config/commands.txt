@@ -186,6 +186,19 @@ printf "ls ; aa ; ls"
 
 >>> End
 
+>>> And & OR
+
+> ls &&
+printf "ls && pwd"
+
+> ls + pwd
+printf "ls flav && pwd"
+
+> ls OR
+printf "ls flav || pwd"
+
+>>> End
+
 >>> Error Messages
 
 > Bad command
